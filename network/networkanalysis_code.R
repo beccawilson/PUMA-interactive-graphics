@@ -5,16 +5,17 @@ library(readxl)
 library(tidyr)
 library(visNetwork)
 
+
 ##############
 #nodes 
 # Read in data
-nodes <- read_excel("finaldata2.xlsx", sheet="nodes")
+nodes <- read_excel("networkanalysis_input.xlsx", sheet="nodes")
 nodes$id <- 1:248
 
 ##############
 #edge
 # Read in edge data
-edges <- read_excel("finaldata2.xlsx", sheet="edges")
+edges <- read_excel("networkanalysis_input.xlsx", sheet="edges")
 
 # Split each study into a separate row
 edges_separate <- tidyr::separate_rows(edges, Tags, sep="\\; ")
@@ -38,7 +39,7 @@ colnames(final_edges) <- c("from", "to")
 #node properties
 nodes$color <- ifelse(nodes$Type == 1, "#92B2BD", "#C9002F")
 nodes$shape <- ifelse(nodes$Type == 1, "dot", "square")
-nodes$group <- ifelse(nodes$Type == 1, "Publication", "Study")
+nodes$group <- ifelse(nodes$Type == 1, "Paper", "Study")
 nodes$title <- nodes$Name
 nodes$label <- ""
 
@@ -48,8 +49,9 @@ final_edges$color <- "#BFBFBF"
 ##########
 #network plot
 visNetwork(nodes, final_edges) %>%
-  visNodes(shape = ~shape, color = ~color, title = ~title, label = ~label) %>%
-  visGroups(groupname = "Publication", shape = "dot", color = "#92B2BD") %>%
+  visNodes(shape = ~shape, size = 40, color = ~color, title = ~title, label = ~label) %>%
+  visGroups(groupname = "Paper", shape = "dot", color = "#92B2BD") %>%
   visGroups(groupname = "Study", shape = "square", color = "#C9002F") %>%
   visOptions(highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE)) %>%
-  visLegend(width = 0.2, position = "left")
+  visLegend(useGroups = TRUE, position = "left")
+
