@@ -9,7 +9,7 @@ library("ggplot2")
 library("stringr")
 
 #data
-data <-read.csv("consortia.csv")
+data <-read.csv("bubbleplot_input.csv")
 
 #text for data
 data$text <- paste(data$Tag)
@@ -55,7 +55,7 @@ interactive <- ggplot() +
   coord_equal()
 
 # Turn it interactive with adjusted zoom
-widg <- girafe(ggobj = interactive, width_svg = 10, height_svg = 10, sizingPolicy(defaultWidth = "100%")) 
+widg <- girafe(ggobj = interactive, width_svg = 5, height_svg = 5, sizingPolicy(defaultWidth = "100%")) 
 
 # Display the widget
 widg
