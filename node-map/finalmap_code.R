@@ -21,7 +21,8 @@ studies$popup_text <- paste0("<b>Study Name(s):</b> ", studies$Acronym, "<br><b>
 
 leaflet() %>%
   addTiles() %>%
-  setView(lng = 12.43, lat = 42.98, zoom = 1) %>%
+  fitBounds(-85.0511, 180, 85.0511, -180) %>%
+  #setView(lng = 12.43, lat = 42.98, zoom =1 ) %>%
   addMarkers(lng = studies$Lng, lat = studies$Lat, icon = icons_list, popup = studies$popup_text)
 
 
