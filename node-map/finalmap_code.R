@@ -18,11 +18,15 @@ studies <-read.csv("map_input.csv")
 studyname <- studies$Acronym
 studies$popup_text <- paste0("<b>Study Name(s):</b> ", studies$Acronym, "<br><b>City:</b> ", studies$City, "<br><b>Country:</b>", studies$Country)
 
+#Katie original
+#leaflet() %>%
+  #addTiles() %>%
+  #setView(lng = 12.43, lat = 42.98, zoom =1 ) %>%
+  #addMarkers(lng = studies$Lng, lat = studies$Lat, icon = icons_list, popup = studies$popup_text)
 
+#Update map view to be global
 leaflet() %>%
   addTiles() %>%
-  fitBounds(-85.0511, 180, 85.0511, -180) %>%
-  #setView(lng = 12.43, lat = 42.98, zoom =1 ) %>%
+  setView(lng = -3.7, lat = 40.4, zoom = 1 ) %>%
   addMarkers(lng = studies$Lng, lat = studies$Lat, icon = icons_list, popup = studies$popup_text)
-
-
+  
